@@ -1,0 +1,57 @@
+/* VARIABLES */
+
+:root { /* fonts */
+    --ff-lato:    "Lato";
+    --ff-roboto:  "Roboto";
+    --ff-jost:    "Jost";
+    --ff-inter:   "Inter";
+    --ff-noto:    "Noto Sans";
+    --ff-manrope: "Manrope";
+    --ff-viaoda:  "Viaoda Libre";
+    --ff-tinos:   "Tinos";
+}
+
+:root { /* colors */
+    /* MAIN COLORS */
+    --interaction-primary:  rgb(107, 227, 197);
+    --accent-color-1:       rgb(255, 159, 67);
+
+    --background-primary:   rgb(9, 13, 22);
+    --background-secondary: rgb(15, 20, 32);
+    --background-neutral:   rgb(23, 30, 46);
+    --background-accent:    rgb(255, 110, 64);
+    --background-accent-2:  rgb(255, 210, 74);
+    --background-accent-3:  rgb(90, 139, 255);
+
+    --surface-elevated:     rgba(16, 22, 35, 0.88);
+    --surface-strong:       rgb(24, 31, 48);
+    --border-soft:          rgba(196, 212, 255, 0.14);
+
+    --text-primary:         rgb(244, 247, 255);
+    --text-secondary:       rgb(176, 188, 214);
+    --text-accent:          rgb(255, 191, 120);
+    --text-muted:           rgb(121, 135, 166);
+    --text-on-accent:       rgb(10, 13, 20);
+}
+
+:root { /* sizes */
+    --header-small-height: 80px;
+    --header-big-height:   120px;
+
+    @media screen and (max-width: 600px) {
+        --header-small-height: 60px;
+        --header-big-height:   100px;
+    }
+}
+
+:root { /* border radius */
+    --br-100: 999px;
+    --br-32:  32px;
+    --br-16:  16px;
+    --br-8:   8px;
+}
+
+:root { /* transition duration times */
+    --slow-transition-time: .6s;
+    --fast-transition-time: .3s;
+}
