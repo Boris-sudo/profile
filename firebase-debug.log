@@ -1,0 +1,21 @@
+[debug] [2026-03-24T09:21:23.829Z] ----------------------------------------------------------------------
+[debug] [2026-03-24T09:21:23.833Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\boris\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2026-03-24T09:21:23.834Z] CLI Version:   15.10.1
+[debug] [2026-03-24T09:21:23.834Z] Platform:      win32
+[debug] [2026-03-24T09:21:23.834Z] Node Version:  v24.13.0
+[debug] [2026-03-24T09:21:23.834Z] Time:          Tue Mar 24 2026 12:21:23 GMT+0300 (Москва, стандартное время)
+[debug] [2026-03-24T09:21:23.835Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-24T09:21:28.004Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-24T09:21:28.005Z] > authorizing via signed-in user (boriskiva3@gmail.com)
+[debug] [2026-03-24T09:21:28.005Z] [iam] checking project boriskiva for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-03-24T09:21:28.008Z] Checked if tokens are valid: true, expires at: 1774346539027
+[debug] [2026-03-24T09:21:28.009Z] Checked if tokens are valid: true, expires at: 1774346539027
+[debug] [2026-03-24T09:21:28.010Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/boriskiva:testIamPermissions [none]
+[debug] [2026-03-24T09:21:28.011Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/boriskiva:testIamPermissions  x-goog-user-project=boriskiva
+[debug] [2026-03-24T09:21:28.011Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/boriskiva:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-03-24T09:21:29.758Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/boriskiva:testIamPermissions 200
+[debug] [2026-03-24T09:21:29.761Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/boriskiva:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-03-24T09:21:29.762Z] Checked if tokens are valid: true, expires at: 1774346539027
+[debug] [2026-03-24T09:21:29.762Z] Checked if tokens are valid: true, expires at: 1774346539027
+[debug] [2026-03-24T09:21:29.763Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/boriskiva [none]
