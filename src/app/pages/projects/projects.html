@@ -1,88 +1,45 @@
 <section class="projects page-container">
-  <section class="page-hero">
+  <section id="projects-overview" class="projects-lead panel">
     <p class="eyebrow">Проекты</p>
-    <h1 class="page-title">Мои основные продуктовые, исследовательские и инженерные проекты: от маршрутов и виртуальной примерочной до Lean и Telegram-бота.</h1>
-    <p class="page-lead">
-      Ниже собраны проекты из портфолио. Для каждой карточки добавлена ссылка на GitHub: она ведёт либо на конкретный репозиторий, либо на поиск по профилю `Boris-sudo`, если точное имя репозитория ещё не подтверждено.
+    <h1 class="page-title">Каталог кейсов, собранный из общего сервиса проектов и развёрнутый как единая история разработки.</h1>
+    <p class="page-text">
+      Здесь можно смотреть не только на названия репозиториев, а на типы задач, стек, продуктовый контекст и основные
+      направления работы.
     </p>
   </section>
 
-  <section class="project-grid">
-    <article class="project-card project-card--featured">
-      <span class="project-index">01</span>
-      <h2>Trip Tuner</h2>
-      <p>
-        Приложение, строящее маршруты по текстовому описанию пользователя и его предпочтениям. Пользователь задаёт формат прогулки, бюджет, начальную и конечную точки, а система собирает маршрут по этим ограничениям.
-      </p>
-      <div class="tags">
-        <span>Angular</span>
-        <span>Node.js</span>
-        <span>MongoDB</span>
-        <span>RabbitMQ</span>
-      </div>
-      <a class="project-link" href="https://github.com/TripTuner/app" target="_blank" rel="noreferrer">Открыть на GitHub</a>
-    </article>
+  <section id="projecтts-featured" class="project-featured panel">
+    <div class="project-featured__meta">
+      <small>{{ featuredProject.order }}</small>
+    </div>
 
-    <article class="project-card">
-      <span class="project-index">02</span>
-      <h2>My Topology</h2>
-      <p>Проект на Lean: изучение представленной разработчиками топологии по книгам Бурбаки и создание собственной по книгам Виро.</p>
-      <div class="tags">
-        <span>Lean</span>
-        <span>Математика</span>
-        <span>Теоремы</span>
+    <div class="project-featured__body">
+      <h2>{{ featuredProject.title }}</h2>
+      <p>{{ featuredProject.summary }}</p>
+      <p class="project-featured__description">{{ featuredProject.description }}</p>
+      <div class="project-tags">
+        <span *ngFor="let tag of featuredProject.tags">{{ tag }}</span>
       </div>
-      <a class="project-link" href="https://github.com/Boris-sudo/MyTopology" target="_blank" rel="noreferrer">Открыть на GitHub</a>
-    </article>
+    </div>
 
-    <article class="project-card">
-      <span class="project-index">03</span>
-      <h2>Moscow Prod Hack Frontend</h2>
-      <p>Фронтенд-проект, связанный с PROD-хакатоном. Подробное описание и стек пока не указаны, поэтому блок подготовлен как заготовка под будущий кейс.</p>
-      <div class="tags">
-        <span>Frontend</span>
-        <span>Hackathon</span>
-        <span>PROD</span>
-      </div>
-      <a class="project-link" href="https://github.com/Boris-sudo/MoscowProdHackFrontend" target="_blank" rel="noreferrer">Открыть на GitHub</a>
-    </article>
+    <a class="project-featured__link" [href]="featuredProject.githubUrl" target="_blank" rel="noreferrer">GitHub</a>
+  </section>
 
-    <article class="project-card">
-      <span class="project-index">04</span>
-      <h2>Strategy game</h2>
-      <p>Игровой проект. Подробности обзора и технической реализации пока не были указаны, поэтому карточка оставлена как место под будущий полноценный разбор.</p>
-      <div class="tags">
-        <span>Game</span>
-        <span>Strategy</span>
-        <span>Case Study</span>
+  <section id="projects-grid" class="projects-grid">
+    <article *ngFor="let project of projectGrid; trackBy: trackByProject" class="project-card" [class.project-card--accent]="project.accent === 'warm'">
+      <div class="project-top">
+        <span>{{ project.order }}</span>
+        <a [href]="project.githubUrl" target="_blank" rel="noreferrer">GitHub</a>
       </div>
-      <a class="project-link" href="https://github.com/gurovic/Strategy_game" target="_blank" rel="noreferrer">Открыть на GitHub</a>
-    </article>
 
-    <article class="project-card">
-      <span class="project-index">05</span>
-      <h2>Styllz</h2>
-      <p>Виртуальная онлайн-примерочная. Пользователь загружает своё фото и задаёт описание одежды, а нейросеть генерирует образ в нужном стиле. Позже планировалось добавить поиск одежды по маркетплейсам.</p>
-      <div class="tags">
-        <span>Angular</span>
-        <span>Django</span>
-        <span>PostgreSQL</span>
-        <span>Docker</span>
-      </div>
-      <a class="project-link" href="https://github.com/Styllz-dev" target="_blank" rel="noreferrer">Открыть на GitHub</a>
-    </article>
+      <p class="project-subtitle">{{ project.subtitle }}</p>
+      <h2>{{ project.title }}</h2>
+      <p>{{ project.summary }}</p>
+      <p class="project-description">{{ project.description }}</p>
 
-    <article class="project-card">
-      <span class="project-index">06</span>
-      <h2>Olympiad Programming tgbot</h2>
-      <p>MVP телеграм-бота для олимпиадного программирования: подбор задач по информатике, рейтинг участников, ежедневная задача и проверка решения с обновлением рейтинга.</p>
-      <div class="tags">
-        <span>Django</span>
-        <span>aiogram</span>
-        <span>Codeforces API</span>
-        <span>Telegram Bot</span>
+      <div class="project-tags">
+        <span *ngFor="let tag of project.tags">{{ tag }}</span>
       </div>
-      <a class="project-link" href="https://github.com/Boris-sudo/OlympiadProgrammingTgBot" target="_blank" rel="noreferrer">Открыть на GitHub</a>
     </article>
   </section>
 </section>

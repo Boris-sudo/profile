@@ -1,177 +1,290 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { filter } from 'rxjs';
 import { SidebarInteractionService } from '../services/sidebar-interaction.service';
 
+interface HeaderNavLink {
+  label: string;
+  route?: string;
+  href?: string;
+  accentArrow?: boolean;
+}
+
 @Component({
-    selector: 'app-header',
-    imports: [RouterLink],
-    template: `
-        <header class="header-shell">
-            <div class="header-content">
-                <a class="brand" routerLink="/">
-                    <span class="brand-mark">B</span>
-                    <span class="brand-copy">
-                        <strong>Портфолио Бориса</strong>
-                        <small>Fullstack программист, дизайнер и математик</small>
-                    </span>
-                </a>
-                
-                <div class="header-actions">
-                    <span class="status-pill">Россия • Красногорск</span>
-                    <button class="menu-button" type="button" (click)="toggleSidebar()" aria-label="Открыть навигацию">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
-        </header>
-    `,
-    styles: `
-        :host {
-            position: sticky;
-            top:      0;
-            z-index:  30;
-            display:  block;
-        }
+  selector: 'app-header',
+  imports: [CommonModule, RouterLink, RouterLinkActive],
+  template: `
+    <header class="header-shell">
+      <div class="header-content">
+        <a class="brand" routerLink="/">
+          <small class="brand-note">личный профиль</small>
+          <strong>борис кива</strong>
+        </a>
 
-        .header-shell {
-            width:   100%;
-            padding: 18px 24px 0;
-        }
+        <nav class="header-nav">
+          <ng-container *ngFor="let link of currentLinks">
+            <a
+              *ngIf="link.route; else anchorLink"
+              [routerLink]="link.route"
+              routerLinkActive="header-nav__link--active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              [class.header-nav__link--route]="link.accentArrow"
+            >
+              <span>{{ link.label }}</span>
+              <small *ngIf="link.accentArrow" aria-hidden="true">↗</small>
+            </a>
 
-        .header-content {
-            max-width:       1440px;
-            margin:          0 auto;
-            min-height:      var(--header-small-height);
-            display:         flex;
-            align-items:     center;
-            justify-content: space-between;
-            gap:             20px;
-            padding:         14px 18px;
-            border:          1px solid var(--border-soft);
-            border-radius:   var(--br-32);
-            background:      linear-gradient(180deg, rgba(18, 25, 38, 0.92), rgba(13, 18, 30, 0.78));
-            backdrop-filter: blur(24px);
-            box-shadow:      0 18px 50px rgba(0, 0, 0, 0.28);
-        }
+            <ng-template #anchorLink>
+              <a [href]="link.href">
+                <span>{{ link.label }}</span>
+              </a>
+            </ng-template>
+          </ng-container>
+        </nav>
 
-        .brand {
-            display:     inline-flex;
-            align-items: center;
-            gap:         14px;
-        }
+        <div class="header-actions">
+          <a class="header-contact" routerLink="/contacts" routerLinkActive="header-contact--active">Контакты</a>
 
-        .brand-mark {
-            width:         48px;
-            height:        48px;
-            display:       grid;
-            place-items:   center;
-            border-radius: 16px;
-            background:    linear-gradient(135deg, var(--interaction-primary), var(--background-accent-2));
-            color:         var(--text-on-accent);
-            font:          700 1.4rem/1 var(--ff-viaoda), serif;
-            box-shadow:    0 12px 28px rgba(107, 227, 197, 0.22);
-        }
+          <button class="menu-button" type="button" (click)="toggleSidebar()" aria-label="Открыть навигацию">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+  `,
+  styles: `
+    :host {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: block;
+    }
 
-        .brand-copy {
-            display:        flex;
-            flex-direction: column;
-            gap:            2px;
-        }
+    .header-shell {
+      width: 100%;
+      padding: 18px 24px 0;
+    }
 
-        .brand-copy strong {
-            font:           700 1rem/1.1 var(--ff-manrope), sans-serif;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
+    .header-content {
+      max-width: 1440px;
+      margin: 0 auto;
+      min-height: var(--header-small-height);
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid var(--border-strong);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(18, 22, 34, 0.82), rgba(13, 16, 26, 0.74));
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-soft);
+    }
 
-        .brand-copy small {
-            color: var(--text-secondary);
-            font:  500 0.86rem/1.1 var(--ff-jost), sans-serif;
-        }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-        .header-actions {
-            display:     flex;
-            align-items: center;
-            gap:         12px;
-        }
+    .brand-note {
+      color: var(--text-muted);
+      font: 600 0.66rem/1 var(--ff-manrope), sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
 
-        .status-pill {
-            min-height:     42px;
-            padding:        0 16px;
-            display:        inline-flex;
-            align-items:    center;
-            border:         1px solid rgba(107, 227, 197, 0.2);
-            border-radius:  999px;
-            background:     rgba(107, 227, 197, 0.08);
-            color:          var(--interaction-primary);
-            font:           600 0.82rem/1 var(--ff-manrope), sans-serif;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
+    .brand strong {
+      font: 700 1rem/1 var(--ff-manrope), sans-serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
 
-        .menu-button {
-            width:           54px;
-            height:          54px;
-            border:          0;
-            border-radius:   18px;
-            display:         inline-flex;
-            flex-direction:  column;
-            align-items:     center;
-            justify-content: center;
-            gap:             5px;
-            cursor:          pointer;
-            background:      linear-gradient(180deg, rgba(30, 39, 58, 0.96), rgba(21, 28, 44, 0.96));
-            box-shadow:      inset 0 1px 0 rgba(255, 255, 255, 0.04);
-            transition:      transform var(--fast-transition-time) ease,
-                             background var(--fast-transition-time) ease,
-                             box-shadow var(--fast-transition-time) ease;
-        }
+    .header-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
 
-        .menu-button:hover {
-            transform:  translateY(-2px);
-            background: linear-gradient(180deg, rgba(39, 52, 77, 0.96), rgba(24, 34, 54, 0.96));
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04),
-                        0 12px 24px rgba(0, 0, 0, 0.22);
-        }
+    .header-nav a {
+      min-height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--text-secondary);
+      font: 600 0.78rem/1 var(--ff-manrope), sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition:
+        color var(--fast-transition-time) ease,
+        border-color var(--fast-transition-time) ease,
+        background var(--fast-transition-time) ease,
+        transform var(--fast-transition-time) ease;
+    }
 
-        .menu-button span {
-            width:         18px;
-            height:        2px;
-            border-radius: 999px;
-            background:    var(--text-primary);
-        }
+    .header-nav a small {
+      color: #ffd39f;
+      font: 700 0.82rem/1 var(--ff-manrope), sans-serif;
+      transform: translateY(-1px);
+      transition: transform var(--fast-transition-time) ease;
+    }
 
-        @media screen and (max-width: 700px) {
-            .header-shell {
-                padding: 14px 12px 0;
-            }
+    .header-nav a:hover,
+    .header-nav__link--active {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+      background: var(--surface-glass);
+      transform: translateY(-2px);
+    }
 
-            .header-content {
-                padding:       12px 14px;
-                border-radius: 24px;
-            }
+    .header-nav__link--route:hover small,
+    .header-nav__link--active small {
+      transform: translate3d(2px, -3px, 0);
+    }
 
-            .brand-copy small {
-                display: none;
-            }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
 
-            .brand-copy strong {
-                font-size:      0.86rem;
-                letter-spacing: 0.06em;
-            }
+    .header-contact {
+      min-height: 44px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 119, 74, 0.18), rgba(255, 184, 98, 0.16));
+      border: 1px solid rgba(255, 184, 98, 0.32);
+      color: #ffc98b;
+      font: 700 0.78rem/1 var(--ff-manrope), sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transition:
+        transform var(--fast-transition-time) ease,
+        box-shadow var(--fast-transition-time) ease,
+        border-color var(--fast-transition-time) ease,
+        color var(--fast-transition-time) ease;
+    }
 
-            .status-pill {
-                display: none;
-            }
-        }
-    `,
+    .header-contact:hover,
+    .header-contact--active {
+      transform: translateY(-2px);
+      border-color: rgba(255, 207, 139, 0.48);
+      box-shadow: 0 14px 26px rgba(255, 119, 74, 0.16);
+      color: #fff1dc;
+    }
+
+    .menu-button {
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      background: var(--surface-glass);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform var(--fast-transition-time) ease, background var(--fast-transition-time) ease;
+    }
+
+    .menu-button:hover {
+      transform: translateY(-2px);
+      background: var(--surface-glow);
+    }
+
+    .menu-button span {
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--text-primary);
+    }
+
+    @media screen and (max-width: 980px) {
+      .header-content {
+        grid-template-columns: auto auto;
+        justify-content: space-between;
+      }
+
+      .header-nav,
+      .header-contact {
+        display: none;
+      }
+
+      .menu-button {
+        display: inline-flex;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      .header-shell {
+        padding: 12px 12px 0;
+      }
+
+      .header-content {
+        min-height: 72px;
+        padding: 12px 14px;
+        border-radius: 22px;
+      }
+
+      .brand strong {
+        font-size: 0.86rem;
+      }
+
+      .brand-note {
+        font-size: 0.58rem;
+      }
+
+      .menu-button {
+        width: 46px;
+        height: 46px;
+        border-radius: 16px;
+      }
+    }
+  `,
 })
 export class Header {
-    private readonly sidebarInteractionService = inject(SidebarInteractionService);
+  private readonly sidebarInteractionService = inject(SidebarInteractionService);
+  private readonly router = inject(Router);
 
-    toggleSidebar(): void {
-        this.sidebarInteractionService.toggle();
+  protected currentLinks: HeaderNavLink[] = [];
+
+  constructor() {
+    this.setLinks(this.router.url);
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        this.setLinks((event as NavigationEnd).urlAfterRedirects);
+      });
+  }
+
+  toggleSidebar(): void {
+    this.sidebarInteractionService.toggle();
+  }
+
+  private setLinks(url: string): void {
+    if (url.startsWith('/projects')) {
+      this.currentLinks = [
+        { label: 'Обзор', href: '/projects/#projects-overview' },
+        { label: 'Кейсы', href: '/projects/#projects-list' },
+      ];
+      return;
     }
+
+    this.currentLinks = [
+      { label: 'Интро', href: '#home-intro' },
+      { label: 'Обо мне', href: '#home-about' },
+      { label: 'Проекты', href: '#home-selected' },
+      { label: 'Контакт', href: '#home-contact' },
+      { label: 'Все проекты', route: '/projects', accentArrow: true },
+    ];
+  }
 }

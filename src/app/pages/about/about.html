@@ -1,37 +1,36 @@
 <section class="about page-container">
-  <section class="page-hero">
+  <section class="about-hero panel">
     <p class="eyebrow">Обо мне</p>
-    <h1 class="page-title">Я работаю на стыке программирования, дизайна и математики: от интерфейсов и backend до алгоритмов и формальных систем.</h1>
-    <p class="page-lead">
-      Коммерческого опыта пока нет, но уже есть собственные проекты, олимпиадные достижения и сильный технический фундамент, который можно развивать в продуктовую и инженерную сторону.
+    <h1 class="page-title">Я двигаюсь между кодом, визуальным решением и математической логикой, а не замыкаюсь внутри одной роли.</h1>
+    <p class="page-text">
+      Эта страница собрана как профильный ландшафт: не просто резюме, а карта того, как я думаю, что умею и из чего
+      строю свой подход.
     </p>
   </section>
 
   <section class="about-grid">
-    <article class="info-card">
-      <span>Позиционирование</span>
-      <h2>Fullstack программист и дизайнер</h2>
-      <p>Мне интересны продукты целиком: идея, интерфейс, клиентская часть, серверная логика, работа с данными и визуальная подача.</p>
+    <article class="about-card panel">
+      <small>Роль</small>
+      <h2>Fullstack + visual thinking</h2>
+      <p>Мне интересны продукты целиком: идея, интерфейс, логика, архитектура и итоговый пользовательский опыт.</p>
     </article>
 
-    <article class="info-card">
-      <span>Навыки</span>
-      <h2>Технологии и инструменты</h2>
-      <p>Angular, React, Node.js, Python, C++, C, Lean, WebStorm, CLion, GitHub, CI/CD, UI/UX, Figma, математика и физика.</p>
+    <article class="about-card panel">
+      <small>Стек</small>
+      <h2>Angular, React, Node.js, Python, C++, Lean</h2>
+      <p>Плюс GitHub, CI/CD, WebStorm, CLion, Figma, UI/UX и исследовательский подход к сложным системам.</p>
     </article>
 
-    <article class="timeline-card">
-      <p class="eyebrow eyebrow--small">Языки</p>
+    <article class="about-card panel">
+      <small>Языки</small>
       <ul>
         <li>Русский — основной</li>
         <li>Английский — B2+ / C1</li>
       </ul>
     </article>
-  </section>
 
-  <section class="about-grid about-grid--secondary">
-    <article class="timeline-card timeline-card--wide">
-      <p class="eyebrow eyebrow--small">Образование</p>
+    <article class="about-card about-card--wide panel">
+      <small>Образование</small>
       <ul>
         <li>ОАНО Школа Летово, Москва — сентябрь 2022 / июнь 2024</li>
         <li>ГБОУ Школа №1944, Москва — 2024 / 2025</li>
@@ -39,13 +38,29 @@
       </ul>
     </article>
 
-    <article class="timeline-card timeline-card--wide">
-      <p class="eyebrow eyebrow--small">Награды</p>
+    <article class="about-card about-card--wide about-card--accent panel">
+      <small>Награды</small>
       <ul>
-        <li>Призер регионального этапа ВСОШ по информатике 2024-2025</li>
-        <li>Призер регионального этапа ВСОШ по информатике 2023-2024</li>
-        <li>Призер международной олимпиады PROD по промышленной разработке</li>
+        <li>Призёр регионального этапа ВСОШ по информатике 2024-2025</li>
+        <li>Призёр регионального этапа ВСОШ по информатике 2023-2024</li>
+        <li>Призёр международной олимпиады PROD по промышленной разработке</li>
       </ul>
     </article>
+  </section>
+
+  <section class="about-projects panel">
+    <div class="about-projects__lead">
+      <p class="eyebrow">подключено из сервиса</p>
+      <h2>Ключевые проекты здесь тоже берутся из общего источника, чтобы их можно было редактировать централизованно.</h2>
+    </div>
+
+    <div class="about-projects__grid">
+      <article class="about-project" *ngFor="let project of highlightedProjects; trackBy: trackByProject">
+        <small>{{ project.order }}</small>
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.summary }}</p>
+        <a [href]="project.githubUrl" target="_blank" rel="noreferrer">GitHub</a>
+      </article>
+    </div>
   </section>
 </section>

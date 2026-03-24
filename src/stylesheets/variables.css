@@ -12,41 +12,49 @@
 }
 
 :root { /* colors */
-    /* MAIN COLORS */
-    --interaction-primary:  rgb(107, 227, 197);
-    --accent-color-1:       rgb(255, 159, 67);
+    --interaction-primary:  rgb(255, 106, 72);
+    --accent-color-1:       rgb(242, 184, 96);
 
-    --background-primary:   rgb(9, 13, 22);
-    --background-secondary: rgb(15, 20, 32);
-    --background-neutral:   rgb(23, 30, 46);
-    --background-accent:    rgb(255, 110, 64);
-    --background-accent-2:  rgb(255, 210, 74);
-    --background-accent-3:  rgb(90, 139, 255);
+    --background-primary:   rgb(8, 10, 17);
+    --background-secondary: rgb(12, 15, 24);
+    --background-neutral:   rgb(22, 26, 39);
+    --background-accent:    rgb(255, 119, 74);
+    --background-accent-2:  rgb(240, 196, 110);
+    --background-accent-3:  rgb(90, 136, 255);
 
-    --surface-elevated:     rgba(16, 22, 35, 0.88);
-    --surface-strong:       rgb(24, 31, 48);
-    --border-soft:          rgba(196, 212, 255, 0.14);
+    --surface-elevated:     rgba(18, 22, 34, 0.82);
+    --surface-strong:       rgba(26, 31, 47, 0.92);
+    --surface-glass:        rgba(255, 255, 255, 0.04);
+    --surface-glow:         rgba(255, 121, 82, 0.08);
+    --border-soft:          rgba(196, 213, 255, 0.1);
+    --border-strong:        rgba(255, 255, 255, 0.14);
 
-    --text-primary:         rgb(244, 247, 255);
-    --text-secondary:       rgb(176, 188, 214);
-    --text-accent:          rgb(255, 191, 120);
-    --text-muted:           rgb(121, 135, 166);
-    --text-on-accent:       rgb(10, 13, 20);
+    --text-primary:         rgb(246, 247, 251);
+    --text-secondary:       rgb(171, 179, 198);
+    --text-accent:          rgb(244, 195, 126);
+    --text-muted:           rgb(118, 127, 151);
+    --text-on-accent:       rgb(12, 14, 20);
+
+    --shadow-soft:          0 18px 48px rgba(0, 0, 0, 0.24);
+    --shadow-strong:        0 28px 80px rgba(0, 0, 0, 0.42);
 }
 
 :root { /* sizes */
-    --header-small-height: 80px;
+    --header-small-height: 84px;
     --header-big-height:   120px;
 
     @media screen and (max-width: 600px) {
-        --header-small-height: 60px;
-        --header-big-height:   100px;
+        --header-small-height: 64px;
+        --header-big-height:   96px;
     }
 }
 
 :root { /* border radius */
     --br-100: 999px;
+    --br-40:  40px;
     --br-32:  32px;
+    --br-24:  24px;
+    --br-18:  18px;
     --br-16:  16px;
     --br-8:   8px;
 }

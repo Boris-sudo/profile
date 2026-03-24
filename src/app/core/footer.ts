@@ -7,15 +7,17 @@ import { Component } from '@angular/core';
     <footer class="footer-shell">
       <div class="footer-content">
         <div class="footer-copy">
-          <p class="footer-label">Портфолио</p>
-          <h3>Кива Борис. Fullstack программист, дизайнер и математик с интересом к продуктовой разработке, интерфейсам и алгоритмам.</h3>
+          <p class="footer-eyebrow">архив профиля</p>
+          <h3>Сайт собран как персональная сцена: портрет, проекты, исследовательский бэкграунд и инженерная эстетика в одной системе.</h3>
         </div>
 
-        <div class="footer-meta">
-          <span>Angular 21</span>
-          <span>Node.js</span>
-          <span>Python</span>
-          <span>2026</span>
+        <div class="footer-side">
+          <div class="footer-meta">
+            <span>Angular</span>
+            <span>Анимация</span>
+            <span>Фуллстек</span>
+            <span>2026</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -32,48 +34,73 @@ import { Component } from '@angular/core';
     .footer-content {
       max-width: 1440px;
       margin: 0 auto;
+      padding: 24px 28px;
       display: flex;
       justify-content: space-between;
       gap: 24px;
-      padding: 24px 28px;
-      border: 1px solid var(--border-soft);
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at top left, rgba(107, 227, 197, 0.08), transparent 24%),
-        linear-gradient(180deg, rgba(18, 25, 39, 0.92), rgba(11, 17, 29, 0.92));
+      border: 1px solid var(--border-strong);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(17, 21, 33, 0.92), rgba(11, 14, 23, 0.92));
+      box-shadow: var(--shadow-soft);
     }
 
-    .footer-label {
+    .footer-copy {
+      max-width: 620px;
+    }
+
+    .footer-eyebrow {
       margin-bottom: 10px;
       color: var(--text-muted);
+      font: 700 0.66rem/1 var(--ff-manrope), sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      font: 600 0.74rem/1 var(--ff-manrope), sans-serif;
     }
 
     h3 {
-      max-width: 620px;
-      font: 600 1.15rem/1.4 var(--ff-jost), sans-serif;
+      font: 600 1.08rem/1.46 var(--ff-jost), sans-serif;
+    }
+
+    .footer-side {
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: 18px;
     }
 
     .footer-meta {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-end;
-      align-content: flex-start;
       gap: 10px;
     }
 
     .footer-meta span {
-      position: relative;
-      overflow: hidden;
-      padding: 10px 14px;
+      min-height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border-strong);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--surface-glass);
       color: var(--text-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      font: 500 0.88rem/1 var(--ff-manrope), sans-serif;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      font: 600 0.76rem/1 var(--ff-manrope), sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition:
+        transform var(--fast-transition-time) ease,
+        border-color var(--fast-transition-time) ease,
+        background var(--fast-transition-time) ease,
+        color var(--fast-transition-time) ease;
+      cursor: default;
+    }
+
+    .footer-meta span:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
     }
 
     @media screen and (max-width: 800px) {
@@ -87,17 +114,17 @@ import { Component } from '@angular/core';
         border-radius: 24px;
       }
 
+      .footer-side {
+        margin-left: 0;
+        align-items: flex-start;
+      }
+
       .footer-meta {
         justify-content: flex-start;
       }
 
       h3 {
-        font-size: 1rem;
-        line-height: 1.38;
-      }
-
-      .footer-meta span {
-        font-size: 0.8rem;
+        font-size: 0.96rem;
       }
     }
   `,

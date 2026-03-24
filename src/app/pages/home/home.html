@@ -32,70 +32,89 @@
   </section>
 
   <section id="home-about" #revealRef class="home-section reveal-block page-container">
-    <div class="intro-card intro-card--wide">
-      <div class="intro-card__copy">
+    <div class="about-panel">
+      <div class="about-panel__copy">
         <p class="eyebrow">обо мне</p>
-        <h2>Мне интересны интерфейсы с характером, инженерная глубина, исследовательские идеи и визуальная цельность.</h2>
+        <h2>Мне интересны интерфейсы с характером, сильная инженерия и проекты, у которых есть форма, ритм и собственная логика.</h2>
         <p>
-          Я не разделяю разработку, дизайн и аналитическое мышление на отдельные роли. Мне интересно проектировать систему
-          целиком: понимать сценарий, продумывать структуру, писать код, собирать интерфейс и доводить продукт до
-          состояния, где у него есть свой ритм, форма и внутренняя логика.
+          Я работаю на стыке разработки, дизайна и математического мышления. Для меня важно не просто собрать страницу или сервис,
+          а выстроить систему целиком: от структуры и сценария до финального визуального ощущения.
+        </p>
+        <p>
+          Сейчас мне особенно интересны продуктовые интерфейсы, исследовательские проекты и задачи, где можно соединить frontend,
+          backend, визуальную подачу и строгую внутреннюю архитектуру.
         </p>
       </div>
 
-      <div class="intro-card__portrait">
-        <img src="/profile.jpg" alt="Портрет Бориса Кивы" />
-      </div>
-    </div>
-  </section>
-
-  <section id="home-focus" #revealRef class="home-section reveal-block page-container">
-    <div class="cards-grid">
-      <article class="info-card">
-        <small>образование</small>
-        <h3>Летово, Школа №1944, НИУ ВШЭ</h3>
-        <p>Моя траектория связана с сильной математической и инженерной базой, а также с интересом к продуктовой разработке.</p>
-      </article>
-
-      <article class="info-card">
-        <small>стек</small>
-        <div class="tag-cloud">
-          <span *ngFor="let skill of skills">{{ skill }}</span>
+      <div class="about-panel__side">
+        <div class="about-panel__portrait">
+          <img src="/profile.png" alt="Портрет Бориса Кивы" />
         </div>
-      </article>
 
-      <article class="info-card info-card--wide">
-        <small>награды</small>
-        <ul>
-          <li *ngFor="let achievement of achievements">{{ achievement }}</li>
-        </ul>
-      </article>
+        <div class="about-facts">
+          <article class="fact-card">
+            <small>образование</small>
+            <p>Летово, НИУ ВШЭ ПМ (2025 - 2029), НМУ (2025 - 2029)</p>
+          </article>
+
+          <article class="fact-card">
+            <small>стек</small>
+            <div class="tag-cloud">
+              <span *ngFor="let skill of skills">{{ skill }}</span>
+            </div>
+          </article>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="home-selected" #revealRef class="home-section reveal-block page-container">
-    <div class="selected-projects">
-      <div class="selected-projects__lead">
-        <p class="eyebrow">избранные проекты</p>
-        <h2>Ниже появляются карточки ключевых кейсов, чтобы главная ощущалась как живая сцена, а не как статичный лист.</h2>
+    <div class="projects-table">
+      <div class="projects-table__intro">
+        <p class="eyebrow">основные проекты</p>
+        <h2>Несколько работ, через которые проще всего считать мой профиль: продуктовый, исследовательский и инженерный.</h2>
       </div>
 
-      <div class="selected-projects__grid">
-        <article class="project-card" *ngFor="let project of selectedProjects; trackBy: trackByProject">
-          <div class="project-card__top">
-            <small>{{ project.order }}</small>
+      <div class="projects-table__rows">
+        <article *ngFor="let project of selectedProjects; trackBy: trackByProject" class="project-row">
+          <div class="project-row__index">{{ project.order }}</div>
+
+          <div class="project-row__title-wrap">
+            <a class="project-row__title" [href]="project.githubUrl" target="_blank" rel="noreferrer">
+              {{ project.title }}
+            </a>
+          </div>
+
+          <div class="project-row__summary">
+            <p>{{ project.summary }}</p>
+          </div>
+
+          <div class="project-row__meta">
             <span>{{ project.subtitle }}</span>
+            <a [href]="project.githubUrl" target="_blank" rel="noreferrer">GitHub ↗</a>
           </div>
-
-          <h3>{{ project.title }}</h3>
-          <p>{{ project.summary }}</p>
-
-          <div class="project-card__tags">
-            <span *ngFor="let tag of project.tags">{{ tag }}</span>
-          </div>
-
-          <a [href]="project.githubUrl" target="_blank" rel="noreferrer">GitHub</a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="home-contact" #revealRef class="home-section reveal-block page-container">
+    <div class="contact-strip">
+      <div class="contact-strip__title">
+        <p class="eyebrow">контакты</p>
+        <h2>Связаться</h2>
+      </div>
+
+      <div class="contact-strip__content">
+        <p>Открыт к проектам, совместной работе и прямому диалогу. Если тебе нужен сильный интерфейс или инженерная реализация, напиши мне напрямую.</p>
+
+        <div class="contact-strip__links">
+          <a href="mailto:boriskiva3@gmail.com">Почта</a>
+          <a href="https://t.me/bokisarik" target="_blank" rel="noreferrer">Telegram</a>
+          <a href="https://github.com/Boris-sudo" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+
+        <div class="contact-strip__note">boriskiva3@gmail.com / t.me/bokisarik / github.com/Boris-sudo</div>
       </div>
     </div>
   </section>
